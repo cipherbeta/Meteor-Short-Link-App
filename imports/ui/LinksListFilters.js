@@ -7,7 +7,8 @@ export default class ChangeVisible extends Component {
         super(props);
         this.state = {
             showingVisible: true,
-            isSearching: false
+            isSearching: false,
+            searchValue: ""
         };
     }
 
@@ -32,6 +33,14 @@ export default class ChangeVisible extends Component {
         this.setState({ isSearching: !this.state.isSearching });
     }
 
+    handleSearchTermChange(e) {
+        e.preventDefault();
+        console.log(e);
+        if (e.key === "Escape") {
+            this.handleSearchViewChange();
+        }
+    }
+
     render() {
         console.log("Current State: ", this.state.showingVisible);
         return (
@@ -42,8 +51,8 @@ export default class ChangeVisible extends Component {
                         type="text"
                         ref="searchInput"
                         style={{ marginBottom: 8, textAlign: "center" }}
-                        placeholder="Search for a phrase/url"
-                        onBlur={this.handleSearchViewChange.bind(this)}
+                        placeholder="Search for a phrase/url."
+                        onChange={e => this.handleSearchTermChange(e)}
                     />
                 ) : (
                     <div className="btn-group btn-group-block" style={{ marginBottom: 8 }}>
@@ -53,11 +62,13 @@ export default class ChangeVisible extends Component {
                         >
                             {this.state.showingVisible ? (
                                 <span>
-                                    <FontAwesomeIcon icon="eye-slash" /> View Hidden Links
+                                    <FontAwesomeIcon icon="eye-slash" /> View Hidden Links (
+                                    {Session.get("countHidden")})
                                 </span>
                             ) : (
                                 <span>
-                                    <FontAwesomeIcon icon="eye" /> Viewing Hidden Links
+                                    <FontAwesomeIcon icon="eye" /> Back to Visible Links (
+                                    {Session.get("countVisible")})
                                 </span>
                             )}
                         </button>

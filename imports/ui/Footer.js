@@ -21,6 +21,10 @@ const Footer = () => (
                 using{" "}
                 <a href="https://www.meteor.com/" target="_blank">
                     MeteorJS
+                </a>{" "}
+                and{" "}
+                <a href="https://picturepan2.github.io/spectre/index.html" target="_blank">
+                    Spectre.css
                 </a>
                 .<br />
                 <span className="text-gray" style={{ fontSize: 12 }}>

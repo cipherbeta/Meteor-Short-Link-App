@@ -9,29 +9,55 @@ export default class LinksList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            links: []
+            links: [],
+            totalLinks: 0,
+            visibleLinks: [],
+            hiddenLinks: []
         };
     }
 
     componentDidMount() {
         this.linksTracker = Tracker.autorun(() => {
             Meteor.subscribe("links");
-            const links = Links.find({
-                visible: Session.get("showVisible")
-            }).fetch();
-            this.setState({ links });
+            const links = Links.find({}).fetch();
+            // const links = Links.find({
+            //     visible: Session.get("showVisible")
+            // }).fetch();
+            let visibleLinks = [];
+            let hiddenLinks = [];
+            let totalLinks = links.length;
+            for (i = 0; i < links.length; i++) {
+                console.log(links[i]);
+                if (links[i].visible === true) {
+                    visibleLinks.push(links[i]);
+                } else {
+                    hiddenLinks.push(links[i]);
+                }
+            }
+            Session.set("countVisible", visibleLinks.length);
+            Session.set("countHidden", hiddenLinks.length);
+            this.setState({ links, totalLinks, visibleLinks, hiddenLinks });
         });
     }
+
+    componentWillUpdate() {}
 
     componentWillUnmount() {
         this.linksTracker.stop();
     }
 
     renderLinksListItems() {
-        return this.state.links.map(link => {
-            let absURL = Meteor.absoluteUrl(link._id);
-            return <LinkListItem key={link._id} absURL={absURL} {...link} />;
-        });
+        if (Session.get("showVisible")) {
+            return this.state.visibleLinks.map(link => {
+                let absURL = Meteor.absoluteUrl(link._id);
+                return <LinkListItem key={link._id} absURL={absURL} {...link} />;
+            });
+        } else {
+            return this.state.hiddenLinks.map(link => {
+                let absURL = Meteor.absoluteUrl(link._id);
+                return <LinkListItem key={link._id} absURL={absURL} {...link} />;
+            });
+        }
     }
     render() {
         console.log(this.state.links);

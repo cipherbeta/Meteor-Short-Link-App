@@ -24,5 +24,7 @@ Tracker.autorun(() => {
 
 Meteor.startup(() => {
     Session.set("showVisible", true);
+    Session.set("countVisible", 0);
+    Session.set("countHidden", 0);
     ReactDOM.render(routes, document.getElementById("app"));
 });
