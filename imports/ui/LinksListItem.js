@@ -48,18 +48,27 @@ export default class LinkListItem extends Component {
                 </div>
                 <div className="panel-footer">
                     <div className="btn-group btn-group-block">
-                        <a href={this.props.absURL} target="_blank" className="btn btn-primary">
+                        <a
+                            href={this.props.absURL}
+                            target="_blank"
+                            className="btn btn-primary tooltip"
+                            data-tooltip="Visit your shortened URL."
+                        >
                             Visit
                         </a>
                         <button
-                            className={"btn " + (this.state.justCopied ? "btn-success" : "")}
+                            className={
+                                "btn tooltip " + (this.state.justCopied ? "btn-success" : "")
+                            }
                             ref="copyButton"
+                            data-tooltip="Copy the shortened link to the clipboard."
                             data-clipboard-text={this.props.absURL}
                         >
                             {this.state.justCopied ? "Copied" : "Copy"}
                         </button>
                         <button
-                            className="btn"
+                            className="btn tooltip"
+                            data-tooltip="Hide the link, but keep it active."
                             onClick={() => {
                                 Meteor.call(
                                     "links.setVisibility",
@@ -68,10 +77,11 @@ export default class LinkListItem extends Component {
                                 );
                             }}
                         >
-                            Hide
+                            {this.props.visible ? "Hide" : "Unhide"}
                         </button>
                         <button
-                            className="btn btn-error"
+                            className="btn btn-error tooltip"
+                            data-tooltip="Permanently delete this link."
                             onClick={() => {
                                 Meteor.call("links.deleteLink", this.props._id);
                             }}
