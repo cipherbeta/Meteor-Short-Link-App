@@ -33,9 +33,24 @@ export default class LinkListItem extends Component {
         return (
             <div className="panel" style={{ marginBottom: 8 }}>
                 <div className="panel-header">
-                    <p className="text-primary" style={{ margin: 0, padding: 0, fontSize: 24 }}>
-                        {this.props.url}
-                    </p>
+                    <div
+                        style={{
+                            textOverflow: "ellipsis",
+                            overflow: "hidden",
+                            whiteSpace: "nowrap"
+                        }}
+                    >
+                        <p
+                            className="text-primary"
+                            style={{
+                                margin: 0,
+                                padding: 0,
+                                fontSize: 24
+                            }}
+                        >
+                            {this.props.url}
+                        </p>
+                    </div>
                 </div>
                 <div className="panel-body">
                     <p>

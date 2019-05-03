@@ -25,7 +25,7 @@ export default class Link extends React.Component {
     render() {
         return (
             <div className="columns" style={{ alignItems: "center", justifyContent: "center" }}>
-                <div className="column" style={{ maxWidth: 700 }}>
+                <div className="column col-12" style={{ maxWidth: 700 }}>
                     <PrivateHeader title="Short Lnk" subtitle="Version 0.1 Alpha" />
                     <AddLink />
                     <LinkListFilters />

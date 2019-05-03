@@ -8,9 +8,11 @@ import {
     faSearch,
     faEye,
     faLink,
-    faEyeSlash
+    faEyeSlash,
+    faUnlink,
+    faTimes
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faSearch, faEye, faLink, faEyeSlash);
+library.add(faSearch, faEye, faLink, faEyeSlash, faUnlink, faTimes);
 
 import "../imports/startup/simple-schema-config";
 import "spectre.css/dist/spectre.min.css";
@@ -26,5 +28,6 @@ Meteor.startup(() => {
     Session.set("showVisible", true);
     Session.set("countVisible", 0);
     Session.set("countHidden", 0);
+    Session.set("countTotal", 0);
     ReactDOM.render(routes, document.getElementById("app"));
 });

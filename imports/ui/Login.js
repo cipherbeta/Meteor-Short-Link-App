@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { Meteor } from "meteor/meteor";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -36,14 +37,18 @@ export default class Login extends React.Component {
                         flexDirection: "column"
                     }}
                 >
-                    <h1>Short Lnk</h1>
+                    <h1 style={{ textAlign: "center" }}>
+                        <FontAwesomeIcon icon="link" size="2x" className="text-primary" />
+                        <br />
+                        Short Lnk
+                    </h1>
 
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
 
                     <form
                         onSubmit={this.onSubmit.bind(this)}
                         noValidate
-                        style={{ minWidth: "30vw" }}
+                        style={{ minWidth: "30vw", marginBottom: 8 }}
                     >
                         <div className="form-group" style={{ textAlign: "center" }}>
                             <input

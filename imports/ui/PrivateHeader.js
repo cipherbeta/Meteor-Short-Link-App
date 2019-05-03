@@ -9,7 +9,7 @@ const PrivateHeader = props => {
     };
     return (
         <nav className="navbar">
-            <section className="navbar-section">
+            <section className="navbar-section" style={{ flexGrow: 1 }}>
                 <a className="navbar-brand mr-2 text-uppercase">
                     <FontAwesomeIcon icon="link" /> {props.title}
                 </a>
@@ -17,7 +17,7 @@ const PrivateHeader = props => {
                     {props.subtitle}
                 </a>
             </section>
-            <section className="navbar-section">
+            <section className="navbar-section" style={{ flexGrow: 0 }}>
                 <p />
                 <button className="btn btn-link" onClick={onLogout}>
                     Log Out

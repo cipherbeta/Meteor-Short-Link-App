@@ -5,7 +5,7 @@ const Footer = () => (
         <div
             className="column"
             style={{
-                height: "4em",
+                height: "8em",
                 display: "flex",
                 flexDirection: "center",
                 alignItems: "center",
@@ -27,7 +27,7 @@ const Footer = () => (
                     Spectre.css
                 </a>
                 .<br />
-                <span className="text-gray" style={{ fontSize: 12 }}>
+                <span className="text-gray" style={{ fontSize: 14 }}>
                     {" "}
                     Check out the Github to host your own.
                 </span>

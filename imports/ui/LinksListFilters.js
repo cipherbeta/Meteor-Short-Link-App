@@ -29,16 +29,17 @@ export default class ChangeVisible extends Component {
         this.setState({ showingVisible });
     }
 
-    handleSearchViewChange() {
-        this.setState({ isSearching: !this.state.isSearching });
+    handleSearchOpen() {
+        this.setState({ isSearching: true });
+    }
+
+    handleSearchClose() {
+        this.setState({ searchValue: "", isSearching: false });
     }
 
     handleSearchTermChange(e) {
         e.preventDefault();
-        console.log(e);
-        if (e.key === "Escape") {
-            this.handleSearchViewChange();
-        }
+        this.setState({ searchValue: e.target.value });
     }
 
     render() {
@@ -46,14 +47,22 @@ export default class ChangeVisible extends Component {
         return (
             <div>
                 {this.state.isSearching ? (
-                    <input
-                        className="form-input"
-                        type="text"
-                        ref="searchInput"
-                        style={{ marginBottom: 8, textAlign: "center" }}
-                        placeholder="Search for a phrase/url."
-                        onChange={e => this.handleSearchTermChange(e)}
-                    />
+                    <div className="has-icon-right">
+                        <input
+                            className="form-input"
+                            type="text"
+                            ref="searchInput"
+                            style={{ marginBottom: 8, textAlign: "center" }}
+                            placeholder="Search for a phrase/url. NOT HOOKED UP YET!!!!!!"
+                            onChange={e => this.handleSearchTermChange(e)}
+                        />
+                        <FontAwesomeIcon
+                            icon="times"
+                            className="form-icon"
+                            onClick={this.handleSearchClose.bind(this)}
+                            style={{ cursor: "pointer" }}
+                        />
+                    </div>
                 ) : (
                     <div className="btn-group btn-group-block" style={{ marginBottom: 8 }}>
                         <button
@@ -62,17 +71,17 @@ export default class ChangeVisible extends Component {
                         >
                             {this.state.showingVisible ? (
                                 <span>
-                                    <FontAwesomeIcon icon="eye-slash" /> View Hidden Links (
+                                    <FontAwesomeIcon icon="eye-slash" /> View Hidden (
                                     {Session.get("countHidden")})
                                 </span>
                             ) : (
                                 <span>
-                                    <FontAwesomeIcon icon="eye" /> Back to Visible Links (
+                                    <FontAwesomeIcon icon="eye" /> View Visible (
                                     {Session.get("countVisible")})
                                 </span>
                             )}
                         </button>
-                        <button className="btn" onClick={this.handleSearchViewChange.bind(this)}>
+                        <button className="btn" onClick={this.handleSearchOpen.bind(this)}>
                             <FontAwesomeIcon icon="search" /> Search Links
                         </button>
                     </div>

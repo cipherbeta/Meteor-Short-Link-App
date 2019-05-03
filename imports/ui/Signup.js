@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { Accounts } from "meteor/accounts-base";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Signup extends React.Component {
     constructor(props) {
@@ -40,14 +41,18 @@ export default class Signup extends React.Component {
                         flexDirection: "column"
                     }}
                 >
-                    <h1>Join Short Lnk</h1>
+                    <h1 style={{ textAlign: "center" }}>
+                        <FontAwesomeIcon icon="link" size="2x" className="text-primary" />
+                        <br />
+                        Join Short Lnk
+                    </h1>
 
                     {this.state.error ? <p>{this.state.error}</p> : undefined}
 
                     <form
                         onSubmit={this.onSubmit.bind(this)}
                         noValidate
-                        style={{ minWidth: "30vw" }}
+                        style={{ minWidth: "30vw", marginBottom: 8 }}
                     >
                         <input
                             type="email"
